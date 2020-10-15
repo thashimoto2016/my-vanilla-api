@@ -1,0 +1,51 @@
+{
+	"routes": [
+		{
+			"route": "/api/message",
+			"allowedRoles": [
+				"authenticated"
+			]
+		},
+		{
+			"route": "/login",
+			"serve": "/.auth/login/aad"
+		},
+		{
+			"route": "/.auth/login/twitter",
+			"statusCode": "404"
+		},
+		{
+			"route": "/.auth/login/github",
+			"statusCode": "404"
+		},
+		{
+			"route": "/.auth/login/facebook",
+			"statusCode": "404"
+		},
+		{
+			"route": "/.auth/login/google",
+			"statusCode": "404"
+		},
+		{
+			"route": "/logout",
+			"serve": "/.auth/logout"
+		}
+	],
+	"platformErrorOverrides": [
+		{
+			"errorType": "NotFound",
+			"serve": "/custom-404.html"
+		},
+		{
+			"errorType": "Unauthenticated",
+			"statusCode": "302",
+			"serve": "/login"
+		}
+	],
+	"defaultHeaders": {
+		"content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
+	},
+	"mimeTypes": {
+		"custom": "text/html"
+	}
+}
